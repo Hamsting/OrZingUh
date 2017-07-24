@@ -44,7 +44,6 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         h = Input.GetAxis("Horizontal");
-        //v = Input.GetAxis("Vertical");
 
         if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W))
             Jump();

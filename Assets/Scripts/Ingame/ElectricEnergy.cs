@@ -10,20 +10,21 @@ public class ElectricEnergy : Energy
 	protected override void Start()
 	{
 		base.Start();
-	}
+		SetMaterial(GameManager.Instance.energyMats[0]);
+    }
 
 	protected override void Update()
 	{
 		base.Update();
 	}
 
-	protected override void OnEnable()
+	protected override void OnEnableEnergy()
 	{
-		base.OnEnable();
+		base.OnEnableEnergy();
 	}
 
-	protected override void OnDisable()
+	protected override void OnDisableEnergy()
 	{
-		base.OnDisable();
+		base.OnDisableEnergy();
 	}
 }

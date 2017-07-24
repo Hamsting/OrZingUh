@@ -12,6 +12,7 @@ public class LightEnergy : Energy
 	{
 		base.Start();
 		energyType = Type.Light;
+		SetMaterial(GameManager.Instance.energyMats[1]);
 	}
 
 	protected override void Update()
@@ -19,15 +20,15 @@ public class LightEnergy : Energy
 		base.Update();
 	}
 
-	protected override void OnEnable()
+	protected override void OnEnableEnergy()
 	{
-		base.OnEnable();
+		base.OnEnableEnergy();
 		player.OnChangeMoveSpeed(player.moveSpeed + SPEED_UP);
 	}
 
-	protected override void OnDisable()
+	protected override void OnDisableEnergy()
 	{
-		base.OnDisable();
+		base.OnDisableEnergy();
 		player.OnChangeMoveSpeed(player.moveSpeed - SPEED_UP);
 	}
 }
