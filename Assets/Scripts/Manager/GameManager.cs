@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
 		}
 	}
 
-	// public Character cha;
+	public PlayerController player;
 	public float timer = 120f;
 
 

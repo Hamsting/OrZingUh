@@ -6,11 +6,14 @@ public class Energy : MonoBehaviour
 {
 	public Type energyType;
 
+	protected PlayerController player;
+
 
 
 	protected virtual void Start()
 	{
 		energyType = Type.Electric;
+		player = GameManager.Instance.player;
 	}
 
 	protected virtual void Update()
@@ -18,7 +21,12 @@ public class Energy : MonoBehaviour
 		
 	}
 
-	protected virtual void OnCharacterEnter()
+	protected virtual void OnEnable()
+	{
+
+	}
+
+	protected virtual void OnDisable()
 	{
 
 	}
@@ -26,7 +34,7 @@ public class Energy : MonoBehaviour
 	protected void OnCollisionEnter(Collision _col)
 	{
 		if (_col.gameObject.tag == "Character")
-			OnCharacterEnter();
+			OnEnable();
 	}
 
 	public enum Type

@@ -5,7 +5,8 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody), typeof(Transform), typeof(CapsuleCollider))]
 public class PlayerController : MonoBehaviour
 {
-
+	[SerializeField]
+	Energy.Type energyType;
     [SerializeField]
     float basicMoveSpeed = 5f, moveSpeed = 5f;
     [SerializeField]
@@ -32,6 +33,11 @@ public class PlayerController : MonoBehaviour
         tr = GetComponent<Transform>();
         ri = GetComponent<Rigidbody>();
     }
+
+	private void Start()
+	{
+		GameManager.Instance.player = this;
+	}
 
     void Update()
     {

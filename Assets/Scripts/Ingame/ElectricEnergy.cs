@@ -17,8 +17,13 @@ public class ElectricEnergy : Energy
 		base.Update();
 	}
 
-	protected override void OnCharacterEnter()
+	protected override void OnEnable()
 	{
-		base.OnCharacterEnter();
+		base.OnEnable();
+	}
+
+	protected override void OnDisable()
+	{
+		base.OnDisable();
 	}
 }

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class LightEnergy : Energy
 {
+	private static readonly float SPEED_UP = 1f;
 
 
 
@@ -18,8 +19,13 @@ public class LightEnergy : Energy
 		base.Update();
 	}
 
-	protected override void OnCharacterEnter()
+	protected override void OnEnable()
 	{
-		base.OnCharacterEnter();
+		base.OnEnable();
+	}
+
+	protected override void OnDisable()
+	{
+		base.OnDisable();
 	}
 }
