@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
 	}
 
 	// public Character cha;
+	public float timer = 120f;
 
 
 
@@ -26,11 +27,17 @@ public class GameManager : MonoBehaviour
 
 	private void Start()
 	{
-		
+		timer = 120f;
 	}
 
 	private void Update()
 	{
-		
+		if (timer > 0f)
+			timer -= Time.deltaTime;
+
+		int timerMin = (int)timer / 60;
+		float timerSec = (int)timer % 60;
+		string timerStr = string.Format("{0:D2}", timerMin) + " : " + string.Format("{0:D2}", timerSec);
+		// GameUIManager.Instance.timerText.text = timerStr;
 	}
 }
