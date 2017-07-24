@@ -169,7 +169,7 @@ public class PlayerController : MonoBehaviour
 			GameManager.Instance.direction = dir;
 			if (rotationCoroutine != null)
 				StopCoroutine(rotationCoroutine);
-			rotationCoroutine = StartCoroutine(RotationAnimate(-90f * (dir + 1)));
+			rotationCoroutine = StartCoroutine(RotationAnimate(-90f * ((dir + 1) % 4)));
 
 			// this.transform.rotation = Quaternion.Euler(0f, -90f * (dir + 1), 0f);
 		}
@@ -185,7 +185,7 @@ public class PlayerController : MonoBehaviour
 		while (true)
 		{
 			float t = rotationCurve.Evaluate(timer / 0.5f);
-			float y = Mathf.Lerp(originY, _rot, t);
+			float y = Mathf.LerpAngle(originY, _rot, t);
 			euler.y = y;
 			this.transform.rotation = Quaternion.Euler(euler);
 			if (timer >= 0.5f)

@@ -29,7 +29,9 @@ public class HeatEnergy : Energy
 			if (timer > 0f)
 				timer -= Time.deltaTime;
 			else
-				OnDisableEnergy();
+			{
+				Destroy(this.gameObject);
+			}
 		}
 	}
 
@@ -41,6 +43,5 @@ public class HeatEnergy : Energy
 	public override void OnDisableEnergy()
 	{
 		base.OnDisableEnergy();
-		Destroy(this.gameObject);
 	}
 }

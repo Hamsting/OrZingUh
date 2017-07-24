@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ChemicalEnergy : Energy
 {
-	private static readonly float SPEED_DOWN = 1f;
+	private static readonly float SPEED_DOWN = 2f;
 
 
 	private void Awake()

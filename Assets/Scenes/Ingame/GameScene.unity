@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -2505,6 +2505,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 1703209520}
     m_Modifications:
+    - target: {fileID: 114102711250739490, guid: 14c402eeaee9bba48aafcf8485c24248,
+        type: 2}
+      propertyPath: rotationCurve.m_Curve.Array.size
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4912664907261520, guid: 14c402eeaee9bba48aafcf8485c24248, type: 2}
       propertyPath: m_LocalPosition.x
       value: 1.093
@@ -2544,6 +2549,36 @@ Prefab:
     - target: {fileID: 4746626348183994, guid: 14c402eeaee9bba48aafcf8485c24248, type: 2}
       propertyPath: m_RootOrder
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114102711250739490, guid: 14c402eeaee9bba48aafcf8485c24248,
+        type: 2}
+      propertyPath: rotationCurve.m_Curve.Array.data[0].inSlope
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114102711250739490, guid: 14c402eeaee9bba48aafcf8485c24248,
+        type: 2}
+      propertyPath: rotationCurve.m_Curve.Array.data[0].outSlope
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114102711250739490, guid: 14c402eeaee9bba48aafcf8485c24248,
+        type: 2}
+      propertyPath: rotationCurve.m_Curve.Array.data[1].time
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114102711250739490, guid: 14c402eeaee9bba48aafcf8485c24248,
+        type: 2}
+      propertyPath: rotationCurve.m_Curve.Array.data[1].value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114102711250739490, guid: 14c402eeaee9bba48aafcf8485c24248,
+        type: 2}
+      propertyPath: rotationCurve.m_RotationOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114102711250739490, guid: 14c402eeaee9bba48aafcf8485c24248,
+        type: 2}
+      propertyPath: jumpPower
+      value: 11
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 23010993991090356, guid: 14c402eeaee9bba48aafcf8485c24248, type: 2}
