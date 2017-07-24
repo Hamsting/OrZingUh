@@ -6,6 +6,7 @@ public class Block : MonoBehaviour
 {
 	public bool isGround = false;
 	public GameObject block;
+    public Sprite icon;
 
 	private Rigidbody rb;
 	private MeshRenderer[] cubes;

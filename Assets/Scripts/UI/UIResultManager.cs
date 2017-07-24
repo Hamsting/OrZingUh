@@ -47,7 +47,7 @@ public class UIResultManager : MonoBehaviour
 
     public void OnRePlay()
     {
-        SceneManager.LoadScene("InGame");
+        SceneManager.LoadScene("GameScene");
     }
 
     public void OnTitle()

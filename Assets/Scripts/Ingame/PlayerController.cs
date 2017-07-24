@@ -5,9 +5,9 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody), typeof(Transform), typeof(CapsuleCollider))]
 public class PlayerController : MonoBehaviour
 {
-	[HideInInspector]
-	public Energy energy;
-	[SerializeField]
+    [HideInInspector]
+    public Energy energy;
+    [SerializeField]
     public float moveSpeed = 5f;
     [SerializeField]
     float jumpPower = 5f;
@@ -24,22 +24,24 @@ public class PlayerController : MonoBehaviour
 
 
 
-	// 컴포넌트 캐싱
-	Rigidbody ri;
+    // 컴포넌트 캐싱
+    Rigidbody ri;
     Transform tr;
+    Animator ani;
 
 
     private void Awake()
     {
         tr = GetComponent<Transform>();
         ri = GetComponent<Rigidbody>();
+        ani = tr.GetChild(0).GetComponent<Animator>();
     }
 
     private void Start()
     {
         GameManager.Instance.player = this;
         CameraController.instance.SetTarget(tr);
-		CameraController.instance.SetPlayerView();
+        CameraController.instance.SetPlayerView();
     }
 
     void Update()
@@ -58,6 +60,8 @@ public class PlayerController : MonoBehaviour
 
         if (isMove)
             Move();
+        else
+            ani.SetFloat("Run", Mathf.Abs(h));
     }
 
 
@@ -65,6 +69,7 @@ public class PlayerController : MonoBehaviour
     {
         Vector3 pos = tr.forward * moveSpeed * h;
         ri.velocity = new Vector3(pos.x, ri.velocity.y, pos.z);
+        ani.SetFloat("Run", Mathf.Abs(h));
     }
 
     void Jump()
@@ -74,6 +79,7 @@ public class PlayerController : MonoBehaviour
 
         ++jumpCount;
         ri.velocity = new Vector3(ri.velocity.x, jumpPower, ri.velocity.z);
+        ani.SetBool("Jump", true);
 
         if (groundCheckDelay != null)
         {
@@ -85,19 +91,20 @@ public class PlayerController : MonoBehaviour
 
     void GroundCheck()
     {
-		int layerMask = -1 - (1 << LayerMask.NameToLayer("Foot"));
+        int layerMask = -1 - (1 << LayerMask.NameToLayer("Foot"));
         RaycastHit hit;
         if (Physics.Raycast(transform.position, Vector3.down, out hit, groundDistance, layerMask))
         {
             isGround = true;
             jumpCount = 0;
-			if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Block"))
-			{
-				Energy e = hit.collider.gameObject.GetComponentInParent<Energy>();
-				if (energy != null)
-					energy.OnDisableEnergy();
-				e.OnEnableEnergy();
-				energy = e;
+            ani.SetBool("Jump", false);
+            if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Block"))
+            {
+                Energy e = hit.collider.gameObject.GetComponentInParent<Energy>();
+                if (energy != null)
+                    energy.OnDisableEnergy();
+                e.OnEnableEnergy();
+                energy = e;
             }
         }
     }
@@ -133,31 +140,32 @@ public class PlayerController : MonoBehaviour
     /// <summary>
     /// 캐릭터의 조종을 허가합니다.
     /// </summary>
-    public void ChangeMove() {
+    public void ChangeMove()
+    {
         isMove = true;
         CameraController.instance.SetPlayerView();
     }
 
-	private void OnCollisionEnter(Collision _col)
-	{
-		if (GameManager.Instance.blockPlaceMode)
-			return;
+    private void OnCollisionEnter(Collision _col)
+    {
+        if (GameManager.Instance.blockPlaceMode)
+            return;
 
-		int dir = -1;
-		string tag = _col.gameObject.tag;
-		if (tag == "Wall_Forward")
-			dir = 0;
-		else if (tag == "Wall_Right")
-			dir = 1;
-		else if (tag == "Wall_Backward")
-			dir = 2;
-		else if (tag == "Wall_Left")
-			dir = 3;
+        int dir = -1;
+        string tag = _col.gameObject.tag;
+        if (tag == "Wall_Forward")
+            dir = 0;
+        else if (tag == "Wall_Right")
+            dir = 1;
+        else if (tag == "Wall_Backward")
+            dir = 2;
+        else if (tag == "Wall_Left")
+            dir = 3;
 
-		if (dir != -1)
-		{
-			GameManager.Instance.direction = dir;
-			this.transform.rotation = Quaternion.Euler(0f, -90f * (dir + 1), 0f);
-		}
-	}
+        if (dir != -1)
+        {
+            GameManager.Instance.direction = dir;
+            this.transform.rotation = Quaternion.Euler(0f, -90f * (dir + 1), 0f);
+        }
+    }
 }

@@ -7,7 +7,7 @@ public class UITitleManager : MonoBehaviour {
 
 
     public void OnGameStart() {
-        SceneManager.LoadScene("InGame");
+        SceneManager.LoadScene("GameScene");
     }
 
     public void OnGameExit() {
