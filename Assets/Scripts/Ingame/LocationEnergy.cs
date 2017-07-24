@@ -47,7 +47,7 @@ public class LocationEnergy : Energy
 
 			if (min != null)
 			{
-				player.transform.position = min.transform.position + new Vector3(0f, 1.5f, 0f);
+				player.transform.position = min.transform.position + new Vector3(0f, 2.5f, 0f);
 				this.teleportOn = false;
 				min.teleportOn = false;
 			}
