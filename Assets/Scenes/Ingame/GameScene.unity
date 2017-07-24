@@ -1413,6 +1413,7 @@ MonoBehaviour:
   direction: 0
   blockCount: 0
   blockPlaceMode: 1
+  gameover: 0
   tower: {fileID: 1631484467}
   stemTop: {fileID: 1310636999}
   minHeightCube: {fileID: 443966951}
@@ -1450,6 +1451,10 @@ MonoBehaviour:
   blocks:
   - {fileID: 1491370299610522, guid: 4bc6f7d4633c5fe4ca506f9d4cb48b70, type: 2}
   - {fileID: 1878412790438102, guid: 8448208c62f2c6a4da14d4abc7df9169, type: 2}
+  - {fileID: 1232711187211772, guid: c801afe3935f423459402c2487faef97, type: 2}
+  - {fileID: 1675957230514750, guid: a46b4806d0f5f0141a7ec85b71c74ca9, type: 2}
+  - {fileID: 1744792498738520, guid: 859d7c34a53cc8d4db709ff93c2d7d4b, type: 2}
+  - {fileID: 1549195317388892, guid: 62cae43f9fc2b0a468c27038f90c946f, type: 2}
 --- !u!1 &863679764
 GameObject:
   m_ObjectHideFlags: 0
@@ -3296,6 +3301,24 @@ MonoBehaviour:
   jumpPower: 5
   jumpCount: 0
   maxJumpCount: 1
+  rotationCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 2.6937852
+      outSlope: 2.6937852
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
   groundDistance: 1
   groundCheck: 1
   isGround: 0

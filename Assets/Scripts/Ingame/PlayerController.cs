@@ -13,6 +13,8 @@ public class PlayerController : MonoBehaviour
     float jumpPower = 5f;
     [SerializeField]
     int jumpCount = 0, maxJumpCount = 1;
+	[SerializeField]
+	AnimationCurve rotationCurve;
 
     [SerializeField]
     float groundDistance = 1f;
@@ -157,7 +159,31 @@ public class PlayerController : MonoBehaviour
 		if (dir != -1)
 		{
 			GameManager.Instance.direction = dir;
-			this.transform.rotation = Quaternion.Euler(0f, -90f * (dir + 1), 0f);
+			if (rotationCoroutine != null)
+				StopCoroutine(rotationCoroutine);
+			rotationCoroutine = StartCoroutine(RotationAnimate(-90f * (dir + 1)));
+
+			// this.transform.rotation = Quaternion.Euler(0f, -90f * (dir + 1), 0f);
+		}
+	}
+
+	Coroutine rotationCoroutine = null;
+
+	private IEnumerator RotationAnimate(float _rot)
+	{
+		float timer = 0f;
+		Vector3 euler = this.transform.rotation.eulerAngles;
+		float originY = euler.y;
+		while (true)
+		{
+			float t = rotationCurve.Evaluate(timer / 0.5f);
+			float y = Mathf.Lerp(originY, _rot, t);
+			euler.y = y;
+			this.transform.rotation = Quaternion.Euler(euler);
+			if (timer >= 0.5f)
+				break;
+			timer += Time.deltaTime;
+			yield return null;
 		}
 	}
 }
