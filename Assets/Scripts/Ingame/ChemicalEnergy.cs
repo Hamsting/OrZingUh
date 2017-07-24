@@ -12,6 +12,7 @@ public class ChemicalEnergy : Energy
 	{
 		base.Start();
 		energyType = Type.Chemical;
+		SetMaterial(GameManager.Instance.energyMats[5]);
 	}
 
 	protected override void Update()
@@ -19,15 +20,15 @@ public class ChemicalEnergy : Energy
 		base.Update();
 	}
 
-	protected override void OnEnable()
+	protected override void OnEnableEnergy()
 	{
-		base.OnEnable();
+		base.OnEnableEnergy();
 		player.OnChangeMoveSpeed(player.moveSpeed - SPEED_DOWN);
 	}
 
-	protected override void OnDisable()
+	protected override void OnDisableEnergy()
 	{
-		base.OnDisable();
+		base.OnDisableEnergy();
 		player.OnChangeMoveSpeed(player.moveSpeed + SPEED_DOWN);
 	}
 }

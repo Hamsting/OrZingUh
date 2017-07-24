@@ -12,6 +12,7 @@ public class HeatEnergy : Energy
 	{
 		base.Start();
 		energyType = Type.Heat;
+		SetMaterial(GameManager.Instance.energyMats[4]);
 	}
 
 	protected override void Update()
@@ -22,18 +23,18 @@ public class HeatEnergy : Energy
 			if (timer > 0f)
 				timer -= Time.deltaTime;
 			else
-				OnDisable();
+				OnDisableEnergy();
 		}
 	}
 
-	protected override void OnEnable()
+	protected override void OnEnableEnergy()
 	{
-		base.OnEnable();
+		base.OnEnableEnergy();
 	}
 
-	protected override void OnDisable()
+	protected override void OnDisableEnergy()
 	{
-		base.OnDisable();
+		base.OnDisableEnergy();
 		Destroy(this.gameObject);
 	}
 }

@@ -11,6 +11,7 @@ public class LocationEnergy : Energy
 	{
 		base.Start();
 		energyType = Type.Location;
+		SetMaterial(GameManager.Instance.energyMats[3]);
 	}
 
 	protected override void Update()
@@ -18,13 +19,13 @@ public class LocationEnergy : Energy
 		base.Update();
 	}
 
-	protected override void OnEnable()
+	protected override void OnEnableEnergy()
 	{
-		base.OnEnable();
+		base.OnEnableEnergy();
 	}
 
-	protected override void OnDisable()
+	protected override void OnDisableEnergy()
 	{
-		base.OnDisable();
+		base.OnDisableEnergy();
 	}
 }

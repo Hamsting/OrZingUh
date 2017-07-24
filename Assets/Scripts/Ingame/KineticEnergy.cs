@@ -11,6 +11,7 @@ public class KineticEnergy : Energy
 	{
 		base.Start();
 		energyType = Type.Kinetic;
+		SetMaterial(GameManager.Instance.energyMats[2]);
 	}
 
 	protected override void Update()
@@ -18,15 +19,15 @@ public class KineticEnergy : Energy
 		base.Update();
 	}
 
-	protected override void OnEnable()
+	protected override void OnEnableEnergy()
 	{
-		base.OnEnable();
+		base.OnEnableEnergy();
 		player.OnChangeJumpCount(2);
 	}
 
-	protected override void OnDisable()
+	protected override void OnDisableEnergy()
 	{
-		base.OnDisable();
+		base.OnDisableEnergy();
 		player.OnChangeJumpCount(1);
 	}
 }

@@ -52,12 +52,35 @@ public class SpawnManager : MonoBehaviour
 
 		int rand = Random.Range(0, blocks.Length);
 		GameObject obj = Instantiate<GameObject>(blocks[rand], tower);
-		float h = gm.height + 20f;
+		float h = gm.height + 12f;
 		Vector3 pos = SPAWNPOS[gm.direction];
 		pos.y = h;
 		obj.transform.localPosition = pos;
 		Vector3 euler = new Vector3(0f, -90f * gm.direction, 0f);
 		obj.transform.rotation = Quaternion.Euler(euler);
+		obj.layer = LayerMask.NameToLayer("MovingBlock");
+
+		switch (Random.Range(0, 6))
+		{
+			case 0:
+				obj.AddComponent<ElectricEnergy>();
+				break;
+			case 1:
+				obj.AddComponent<LightEnergy>();
+				break;
+			case 2:
+				obj.AddComponent<KineticEnergy>();
+				break;
+			case 3:
+				obj.AddComponent<LocationEnergy>();
+				break;
+			case 4:
+				obj.AddComponent<HeatEnergy>();
+				break;
+			case 5:
+				obj.AddComponent<ChemicalEnergy>();
+				break;
+		}
 
 		return obj.GetComponent<Block>();
 	}
