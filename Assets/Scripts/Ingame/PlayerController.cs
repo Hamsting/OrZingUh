@@ -7,16 +7,16 @@ public class PlayerController : MonoBehaviour
 {
 
     [SerializeField]
-    float basicMoveSpeed = 5f, moveSpeed = 5f;
+    float moveSpeed = 5f;
     [SerializeField]
-    float basicJumpPower = 2f, jumpPower = 2f;
+    float jumpPower = 5f;
     [SerializeField]
-    int basicJumpCount = 1, jumpCount = 0,maxJumpCount = 1;
+    int jumpCount = 0, maxJumpCount = 1;
 
     [SerializeField]
     float groundDistance = 1f;
     [SerializeField]
-    bool groundCheck = false, isGround = false, isMove = true;
+    bool groundCheck = true, isGround = false, isMove = true;
 
     [SerializeField]
     private float h, v;
@@ -33,10 +33,15 @@ public class PlayerController : MonoBehaviour
         ri = GetComponent<Rigidbody>();
     }
 
+    private void Start()
+    {
+        CameraController.instance.SetTarget(tr);
+    }
+
     void Update()
     {
-        //h = Input.GetAxis("Horizontal");
-        v = Input.GetAxis("Vertical");
+        h = Input.GetAxis("Horizontal");
+        //v = Input.GetAxis("Vertical");
 
         if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W))
             Jump();
@@ -55,7 +60,8 @@ public class PlayerController : MonoBehaviour
 
     void Move()
     {
-        ri.velocity = tr.forward * moveSpeed * Time.deltaTime;
+        Vector3 pos = tr.forward * moveSpeed * h;
+        ri.velocity = new Vector3(pos.x, ri.velocity.y, pos.z);
     }
 
     void Jump()
@@ -64,7 +70,8 @@ public class PlayerController : MonoBehaviour
             return;
 
         ++jumpCount;
-        ri.AddForce(Vector3.up * jumpPower, ForceMode.VelocityChange);
+        ri.velocity = new Vector3(ri.velocity.x, jumpPower, ri.velocity.z);
+
         if (groundCheckDelay != null)
         {
             StopCoroutine(groundCheckDelay);
@@ -97,42 +104,17 @@ public class PlayerController : MonoBehaviour
     /// 캐릭터의 이동속도를 변경합니다.
     /// </summary>
     /// <param name="changeSpeed">변화할 속도 값</param>
-    public void OnChangeMoveSpeed(float changeSpeed)
+    public void OnChangeMoveSpeed(float _changeSpeed)
     {
-        if (changeMoveSpeed != null)
-            StopCoroutine(changeMoveSpeed);
-
-        changeMoveSpeed = StartCoroutine(ChangeMoveSpeed(changeSpeed));
-    }
-
-    /// <summary>
-    /// 캐릭터의 이동속도를 변경합니다.
-    /// </summary>
-    /// <param name="changeSpeed">변화할 속도 값</param>
-    /// <param name="time">지속 시간</param>
-    public void OnChangeMoveSpeed(float changeSpeed, float time)
-    {
-        if (changeMoveSpeed != null)
-            StopCoroutine(changeMoveSpeed);
-
-        changeMoveSpeed = StartCoroutine(ChangeMoveSpeed(changeSpeed, time));
-    }
-
-    Coroutine changeMoveSpeed = null;
-
-    IEnumerator ChangeMoveSpeed(float changeSpeed, float time = 2f)
-    {
-        moveSpeed = changeSpeed;
-        yield return new WaitForSeconds(time);
-        moveSpeed = basicMoveSpeed;
-        changeMoveSpeed = null;
+        moveSpeed = _changeSpeed;
     }
 
     /// <summary>
     /// 캐릭터의 최대 점프 횟수를 증가합니다.
     /// </summary>
     /// <param name="max">최대 값</param>
-    public void OnChangeJumpCount(int max) {
-        maxJumpCount = max;
+    public void OnChangeJumpCount(int _max)
+    {
+        maxJumpCount = _max;
     }
 }
