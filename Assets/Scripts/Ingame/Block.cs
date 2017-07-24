@@ -8,6 +8,7 @@ public class Block : MonoBehaviour
 	public GameObject block;
 
 	private Rigidbody rb;
+	private MeshRenderer[] cubes;
 
 
 
@@ -18,7 +19,7 @@ public class Block : MonoBehaviour
 
 	private void Start()
 	{
-		
+		cubes = this.GetComponentsInChildren<MeshRenderer>();
 	}
 
 	private void Update()
@@ -50,5 +51,11 @@ public class Block : MonoBehaviour
 		isGround = true;
 		rb.isKinematic = true;
 		this.gameObject.layer = LayerMask.NameToLayer("Block");
+	}
+
+	public void RotateCubes(float _rot)
+	{
+		for (int i = 0; i < cubes.Length; ++i)
+			cubes[i].transform.Rotate(_rot, 0f, 0f);
 	}
 }

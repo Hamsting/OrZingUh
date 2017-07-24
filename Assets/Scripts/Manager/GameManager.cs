@@ -80,9 +80,15 @@ public class GameManager : MonoBehaviour
 				currentBlock.transform.position = pos;
 			}
 			if (Input.GetKeyDown(KeyCode.UpArrow))
+			{
 				currentBlock.block.transform.Rotate(0f, 0f, 90f);
+				currentBlock.RotateCubes(-90f);
+			}
 			else if (Input.GetKeyDown(KeyCode.DownArrow))
+			{
 				currentBlock.block.transform.Rotate(0f, 0f, -90f);
+				currentBlock.RotateCubes(90f);
+			}
 		
 		}
 
