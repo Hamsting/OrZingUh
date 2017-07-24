@@ -5,9 +5,9 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody), typeof(Transform), typeof(CapsuleCollider))]
 public class PlayerController : MonoBehaviour
 {
+	[HideInInspector]
+	public Energy energy;
 	[SerializeField]
-	Energy.Type energyType;
-    [SerializeField]
     public float moveSpeed = 5f;
     [SerializeField]
     float jumpPower = 5f;
@@ -23,8 +23,9 @@ public class PlayerController : MonoBehaviour
     private float h, v;
 
 
-    // 컴포넌트 캐싱
-    Rigidbody ri;
+
+	// 컴포넌트 캐싱
+	Rigidbody ri;
     Transform tr;
 
 
@@ -84,11 +85,20 @@ public class PlayerController : MonoBehaviour
 
     void GroundCheck()
     {
+		int layerMask = -1 - (1 << LayerMask.NameToLayer("Foot"));
         RaycastHit hit;
-        if (Physics.Raycast(transform.position, Vector3.down, out hit, groundDistance))
+        if (Physics.Raycast(transform.position, Vector3.down, out hit, groundDistance, layerMask))
         {
             isGround = true;
             jumpCount = 0;
+			if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Block"))
+			{
+				Energy e = hit.collider.gameObject.GetComponentInParent<Energy>();
+				if (energy != null)
+					energy.OnDisableEnergy();
+				e.OnEnableEnergy();
+				energy = e;
+            }
         }
     }
 
@@ -97,7 +107,7 @@ public class PlayerController : MonoBehaviour
     IEnumerator GroundCheckDelay()
     {
         groundCheck = false;
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.1f);
         groundCheck = true;
         groundCheckDelay = null;
     }
@@ -127,4 +137,27 @@ public class PlayerController : MonoBehaviour
         isMove = true;
         CameraController.instance.SetPlayerView();
     }
+
+	private void OnCollisionEnter(Collision _col)
+	{
+		if (GameManager.Instance.blockPlaceMode)
+			return;
+
+		int dir = -1;
+		string tag = _col.gameObject.tag;
+		if (tag == "Wall_Forward")
+			dir = 0;
+		else if (tag == "Wall_Right")
+			dir = 1;
+		else if (tag == "Wall_Backward")
+			dir = 2;
+		else if (tag == "Wall_Left")
+			dir = 3;
+
+		if (dir != -1)
+		{
+			GameManager.Instance.direction = dir;
+			this.transform.rotation = Quaternion.Euler(0f, -90f * (dir + 1), 0f);
+		}
+	}
 }

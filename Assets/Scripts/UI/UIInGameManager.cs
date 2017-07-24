@@ -32,8 +32,8 @@ public class UIInGameManager : MonoBehaviour {
     /// </summary>
     /// <param name="min">분</param>
     /// <param name="sec">초</param>
-    public void OnChangeTimer(int min, int sec) {
-        timerText.text = min + " : " + sec;
+    public void OnChangeTimer(string _str) {
+		timerText.text = _str;
     }
 
     /// <summary>
@@ -62,7 +62,7 @@ public class UIInGameManager : MonoBehaviour {
     /// <param name="_currentHeight">현재 높이 값</param>
     /// <param name="_maxHeight">최대 높이 값</param>
     public void OnChangeHeightViewer(int _currentHeight, int _maxHeight) {
-        heightChecker.value = (float)_currentHeight / _maxHeight;
+        heightChecker.value = _currentHeight;
         currentHeightText.text = _currentHeight + " m";
         maxHeightText.text = _maxHeight + " m";
     }

@@ -24,6 +24,9 @@ public class SpawnManager : MonoBehaviour
 
 	public GameObject[] blocks;
 
+	[HideInInspector]
+	public Queue<Block> queue;
+
 	private Transform tower;
 	private GameManager gm;
 
@@ -32,26 +35,60 @@ public class SpawnManager : MonoBehaviour
 	private void Awake()
 	{
 		_instance = this;
+		queue = new Queue<Block>();
 	}
 
 	private void Start()
 	{
 		tower = GameManager.Instance.tower;
 		gm = GameManager.Instance;
+		Update();
 	}
 
 	private void Update()
 	{
-		
+		if (queue.Count < 5)
+		{
+			for (int i = queue.Count; i <= 5; ++i)
+			{
+				int rand = Random.Range(0, blocks.Length);
+				GameObject obj = Instantiate<GameObject>(blocks[rand], tower);
+				Block b = obj.GetComponent<Block>();
+
+				switch (Random.Range(0, 6))
+				{
+					case 0:
+						obj.AddComponent<ElectricEnergy>();
+						break;
+					case 1:
+						obj.AddComponent<LightEnergy>();
+						break;
+					case 2:
+						obj.AddComponent<KineticEnergy>();
+						break;
+					case 3:
+						obj.AddComponent<LocationEnergy>();
+						break;
+					case 4:
+						obj.AddComponent<HeatEnergy>();
+						break;
+					case 5:
+						obj.AddComponent<ChemicalEnergy>();
+						break;
+				}
+				queue.Enqueue(b);
+				obj.SetActive(false);
+			}
+		}
 	}
 
 	public Block SpawnNewBlock()
 	{
 		if (blocks == null)
 			return null;
-
-		int rand = Random.Range(0, blocks.Length);
-		GameObject obj = Instantiate<GameObject>(blocks[rand], tower);
+		
+		Block b = queue.Dequeue();
+		GameObject obj = b.gameObject;
 		float h = gm.height + 12f;
 		Vector3 pos = SPAWNPOS[gm.direction];
 		pos.y = h;
@@ -59,29 +96,8 @@ public class SpawnManager : MonoBehaviour
 		Vector3 euler = new Vector3(0f, -90f * gm.direction, 0f);
 		obj.transform.rotation = Quaternion.Euler(euler);
 		obj.layer = LayerMask.NameToLayer("MovingBlock");
+		obj.SetActive(true);
 
-		switch (Random.Range(0, 6))
-		{
-			case 0:
-				obj.AddComponent<ElectricEnergy>();
-				break;
-			case 1:
-				obj.AddComponent<LightEnergy>();
-				break;
-			case 2:
-				obj.AddComponent<KineticEnergy>();
-				break;
-			case 3:
-				obj.AddComponent<LocationEnergy>();
-				break;
-			case 4:
-				obj.AddComponent<HeatEnergy>();
-				break;
-			case 5:
-				obj.AddComponent<ChemicalEnergy>();
-				break;
-		}
-
-		return obj.GetComponent<Block>();
+		return b;
 	}
 }

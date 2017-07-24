@@ -18,12 +18,12 @@ public class ElectricEnergy : Energy
 		base.Update();
 	}
 
-	protected override void OnEnableEnergy()
+	public override void OnEnableEnergy()
 	{
 		base.OnEnableEnergy();
 	}
 
-	protected override void OnDisableEnergy()
+	public override void OnDisableEnergy()
 	{
 		base.OnDisableEnergy();
 	}

@@ -8,10 +8,16 @@ public class LightEnergy : Energy
 
 
 
+	private void Awake()
+	{
+		energyName = "빛 블럭";
+	}
+
 	protected override void Start()
 	{
 		base.Start();
 		energyType = Type.Light;
+		energyName = "빛 블럭";
 		SetMaterial(GameManager.Instance.energyMats[1]);
 	}
 
@@ -20,13 +26,13 @@ public class LightEnergy : Energy
 		base.Update();
 	}
 
-	protected override void OnEnableEnergy()
+	public override void OnEnableEnergy()
 	{
 		base.OnEnableEnergy();
 		player.ChangeMoveSpeed(player.moveSpeed + SPEED_UP);
 	}
 
-	protected override void OnDisableEnergy()
+	public override void OnDisableEnergy()
 	{
 		base.OnDisableEnergy();
 		player.ChangeMoveSpeed(player.moveSpeed - SPEED_UP);

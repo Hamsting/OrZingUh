@@ -7,6 +7,10 @@ public class ChemicalEnergy : Energy
 	private static readonly float SPEED_DOWN = 1f;
 
 
+	private void Awake()
+	{
+		energyName = "화학 블럭";
+	}
 
 	protected override void Start()
 	{
@@ -20,13 +24,13 @@ public class ChemicalEnergy : Energy
 		base.Update();
 	}
 
-	protected override void OnEnableEnergy()
+	public override void OnEnableEnergy()
 	{
 		base.OnEnableEnergy();
 		player.ChangeMoveSpeed(player.moveSpeed - SPEED_DOWN);
 	}
 
-	protected override void OnDisableEnergy()
+	public override void OnDisableEnergy()
 	{
 		base.OnDisableEnergy();
 		player.ChangeMoveSpeed(player.moveSpeed + SPEED_DOWN);

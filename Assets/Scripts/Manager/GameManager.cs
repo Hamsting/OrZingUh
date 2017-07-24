@@ -15,11 +15,11 @@ public class GameManager : MonoBehaviour
 		}
 	}
 
-	[HideInInspector]
+	// [HideInInspector]
 	public PlayerController player;
 	[HideInInspector]
 	public Block currentBlock;
-	[HideInInspector]
+	// [HideInInspector]
 	public float timer = 120f;
 	// [HideInInspector]
 	public float height = 0f;
@@ -29,12 +29,16 @@ public class GameManager : MonoBehaviour
 	public int blockCount = 0;
 	[HideInInspector]
 	public bool blockPlaceMode = true;
+	[HideInInspector]
+	public bool gameover = false;
 
 	public Transform tower;
 	public Transform stemTop;
+	public Transform minHeightCube;
 	public Material[] energyMats;
 
 	private SpawnManager sm;
+	private UIInGameManager ui;
 	private Coroutine coroutine;
 
 
@@ -46,24 +50,43 @@ public class GameManager : MonoBehaviour
 
 	private void Start()
 	{
-		timer = 120f;
+		timer = 60f;
 		sm = SpawnManager.Instance;
+		ui = UIInGameManager.instance;
+		ui.OnChangeMaxHeightViewer(100);
+		ui.OnChangeHeightViewer(0, 100);
 	}
 
 	private void Update()
 	{
-		if (timer == 120f)
+		if (gameover)
+			return;
+
+		if (timer == 60f && blockPlaceMode)
 			NextBlock();
 
 		if (timer > 0f)
 			timer -= Time.deltaTime;
+		else if (timer <= 0f && blockPlaceMode)
+		{
+			StartPlayerMode();
+		}
+		else if (timer <= 0f && !blockPlaceMode)
+		{
+			ui.OnResult();
+			UIResultManager.instance.SetResult(blockCount, (int)height, 100);
+			gameover = true;
+        }
 
 		int timerMin = (int)timer / 60;
 		int timerSec = (int)timer % 60;
-		string timerStr = string.Format("{0:D2}", timerMin) + " : " + string.Format("{0:D2}", timerSec);
-		// GameUIManager.Instance.timerText.text = timerStr;
+		string timerStr = string.Format("{0:D2}", timerMin) + "  " + string.Format("{0:D2}", timerSec);
+		ui.OnChangeTimer(timerStr);
+		ui.OnChangeHeightViewer((int)height, 100);
+		ui.OnChangeBlockInfo(sm.queue.Peek().gameObject.GetComponent<Energy>().energyName, null);
 
-		if (Input.GetKeyDown(KeyCode.Space))
+
+		if (Input.GetKeyDown(KeyCode.Space) && blockPlaceMode)
 		{
 			currentBlock.StopBlock();
 			NextBlock();
@@ -89,17 +112,28 @@ public class GameManager : MonoBehaviour
 				currentBlock.block.transform.Rotate(0f, 0f, -90f);
 				currentBlock.RotateCubes(90f);
 			}
-		
+		}
+		if (!blockPlaceMode)
+		{
+			CalculateHeight();
 		}
 
+		Vector3 minPos = minHeightCube.position;
+		minPos.y = height - 0.5f;
+		minHeightCube.position = minPos;
 	}
 
 	private void CalculateHeight()
 	{
 		height = 0f;
-		int layerMask = (1 << LayerMask.NameToLayer("Ground")) | (1 << LayerMask.NameToLayer("Block"));
+		int layerMask = 0;
+		if (blockPlaceMode)
+			layerMask = (1 << LayerMask.NameToLayer("Ground")) | (1 << LayerMask.NameToLayer("Block"));
+		else
+			layerMask = (1 << LayerMask.NameToLayer("Player"));
+
 		RaycastHit hit;
-		if (Physics.BoxCast(stemTop.position, new Vector3(3f, 1f, 3f), -stemTop.up, out hit, Quaternion.identity, 1000f, layerMask))
+		if (Physics.BoxCast(stemTop.position, new Vector3(3f, 0.025f, 3f), -stemTop.up, out hit, Quaternion.identity, 1000f, layerMask))
 		{
 			height = 1000f - hit.distance;
 		}
@@ -107,6 +141,9 @@ public class GameManager : MonoBehaviour
 
 	public void NextBlock()
 	{
+		if (!blockPlaceMode)
+			return;
+
 		if (coroutine != null)
 			StopCoroutine(coroutine);
 		coroutine = StartCoroutine(NextBlockCoroutine());
@@ -121,11 +158,21 @@ public class GameManager : MonoBehaviour
 			currentBlock = null;
 			yield return StartCoroutine(CameraController.instance.CameraMoveAnimate(camDestPos));
 		}
+		if (blockPlaceMode)
+		{
+			currentBlock = sm.SpawnNewBlock();
+			direction = ++direction % 4;
+			++blockCount;
+			CameraController.instance.SetTarget(currentBlock.transform);
+			CameraController.instance.SetBlockView();
+		}
+	}
 
-		currentBlock = sm.SpawnNewBlock();
-		direction = ++direction % 4;
-		++blockCount;
-		CameraController.instance.SetTarget(currentBlock.transform);
-		CameraController.instance.SetBlockView();
+	private void StartPlayerMode()
+	{
+		blockPlaceMode = false;
+		minHeightCube.gameObject.SetActive(false);
+		player.gameObject.SetActive(true);
+		timer = 30f;
 	}
 }

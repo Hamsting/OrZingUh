@@ -5,6 +5,7 @@ using UnityEngine;
 public class Energy : MonoBehaviour
 {
 	public Type energyType;
+	public string energyName = "기본";
 
 	protected PlayerController player;
 	protected bool isEnabled = false;
@@ -22,22 +23,27 @@ public class Energy : MonoBehaviour
 		
 	}
 
-	protected virtual void OnEnableEnergy()
+	public virtual void OnEnableEnergy()
 	{
 		isEnabled = true;
     }
 
-	protected virtual void OnDisableEnergy()
+	public virtual void OnDisableEnergy()
 	{
 		isEnabled = false;
     }
 
 	protected void OnCollisionEnter(Collision _col)
 	{
-		print(_col.gameObject);
-		print(_col.gameObject.tag);
-		if (_col.gameObject.tag == "Player")
+		/*
+		if (_col.gameObject.tag == "PlayerFoot")
+		{
+			if (player.energy != null)
+				player.energy.OnDisableEnergy();
 			OnEnableEnergy();
+			player.energy = this;
+		}
+		*/
 	}
 
 	public enum Type

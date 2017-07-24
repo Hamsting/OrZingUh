@@ -3,7 +3,12 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Wall_Forward
+  - Wall_Right
+  - Wall_Backward
+  - Wall_Left
+  - PlayerFoot
   layers:
   - Default
   - TransparentFX
@@ -16,7 +21,7 @@ TagManager:
   - Ground
   - Block
   - MovingBlock
-  - 
+  - Player
   - 
   - 
   - 

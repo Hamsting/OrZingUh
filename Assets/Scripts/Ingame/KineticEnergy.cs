@@ -7,10 +7,16 @@ public class KineticEnergy : Energy
 
 
 
+	private void Awake()
+	{
+		energyName = "운동 블럭";
+	}
+
 	protected override void Start()
 	{
 		base.Start();
 		energyType = Type.Kinetic;
+		energyName = "운동 블럭";
 		SetMaterial(GameManager.Instance.energyMats[2]);
 	}
 
@@ -19,13 +25,13 @@ public class KineticEnergy : Energy
 		base.Update();
 	}
 
-	protected override void OnEnableEnergy()
+	public override void OnEnableEnergy()
 	{
 		base.OnEnableEnergy();
 		player.ChangeJumpCount(2);
 	}
 
-	protected override void OnDisableEnergy()
+	public override void OnDisableEnergy()
 	{
 		base.OnDisableEnergy();
 		player.ChangeJumpCount(1);

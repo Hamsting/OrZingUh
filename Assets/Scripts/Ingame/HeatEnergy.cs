@@ -8,10 +8,16 @@ public class HeatEnergy : Energy
 
 
 
+	private void Awake()
+	{
+		energyName = "열 블럭";
+	}
+
 	protected override void Start()
 	{
 		base.Start();
 		energyType = Type.Heat;
+		energyName = "열 블럭";
 		SetMaterial(GameManager.Instance.energyMats[4]);
 	}
 
@@ -27,12 +33,12 @@ public class HeatEnergy : Energy
 		}
 	}
 
-	protected override void OnEnableEnergy()
+	public override void OnEnableEnergy()
 	{
 		base.OnEnableEnergy();
 	}
 
-	protected override void OnDisableEnergy()
+	public override void OnDisableEnergy()
 	{
 		base.OnDisableEnergy();
 		Destroy(this.gameObject);
