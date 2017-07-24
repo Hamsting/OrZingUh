@@ -83,7 +83,7 @@ public class GameManager : MonoBehaviour
 		string timerStr = string.Format("{0:D2}", timerMin) + "  " + string.Format("{0:D2}", timerSec);
 		ui.OnChangeTimer(timerStr);
 		ui.OnChangeHeightViewer((int)height, 100);
-		ui.OnChangeBlockInfo(sm.queue.Peek().gameObject.GetComponent<Energy>().energyName, null);
+		ui.OnChangeBlockInfo(sm.queue.Peek().gameObject.GetComponent<Energy>().energyName, sm.queue.Peek().icon);
 
 
 		if (Input.GetKeyDown(KeyCode.Space) && blockPlaceMode)

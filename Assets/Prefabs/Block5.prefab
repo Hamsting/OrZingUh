@@ -347,3 +347,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isGround: 0
   block: {fileID: 1161149687145372}
+  icon: {fileID: 21300000, guid: 6822a6cba0cc9cb45bd5e508c1a9450f, type: 3}

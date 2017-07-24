@@ -12,8 +12,6 @@ public class UIResultManager : MonoBehaviour
 
     public Slider heightChecker;
 
-    public Text maxHeightText, currentHeightText;
-
     void Awake()
     {
         instance = this;
@@ -41,8 +39,6 @@ public class UIResultManager : MonoBehaviour
     public void OnChangeHeightViewer(int _currentHeight, int _maxHeight)
     {
         heightChecker.value = (float)_currentHeight / _maxHeight;
-        currentHeightText.text = _currentHeight + " m";
-        maxHeightText.text = _maxHeight + " m";
     }
 
     public void OnRePlay()
