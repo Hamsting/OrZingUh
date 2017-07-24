@@ -23,12 +23,12 @@ public class ChemicalEnergy : Energy
 	protected override void OnEnableEnergy()
 	{
 		base.OnEnableEnergy();
-		player.OnChangeMoveSpeed(player.moveSpeed - SPEED_DOWN);
+		player.ChangeMoveSpeed(player.moveSpeed - SPEED_DOWN);
 	}
 
 	protected override void OnDisableEnergy()
 	{
 		base.OnDisableEnergy();
-		player.OnChangeMoveSpeed(player.moveSpeed + SPEED_DOWN);
+		player.ChangeMoveSpeed(player.moveSpeed + SPEED_DOWN);
 	}
 }

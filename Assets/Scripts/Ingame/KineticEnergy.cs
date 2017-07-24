@@ -22,12 +22,12 @@ public class KineticEnergy : Energy
 	protected override void OnEnableEnergy()
 	{
 		base.OnEnableEnergy();
-		player.OnChangeJumpCount(2);
+		player.ChangeJumpCount(2);
 	}
 
 	protected override void OnDisableEnergy()
 	{
 		base.OnDisableEnergy();
-		player.OnChangeJumpCount(1);
+		player.ChangeJumpCount(1);
 	}
 }

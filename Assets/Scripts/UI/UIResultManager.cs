@@ -6,11 +6,18 @@ using UnityEngine.SceneManagement;
 
 public class UIResultManager : MonoBehaviour
 {
+    public static UIResultManager instance;
+
     public Text stackBlockText, riseHeightText, totalScoreText;
 
     public Slider heightChecker;
 
     public Text maxHeightText, currentHeightText;
+
+    void Awake()
+    {
+        instance = this;
+    }
 
     /// <summary>
     /// 결과 창을 표시합니다.

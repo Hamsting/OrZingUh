@@ -23,12 +23,12 @@ public class LightEnergy : Energy
 	protected override void OnEnableEnergy()
 	{
 		base.OnEnableEnergy();
-		player.OnChangeMoveSpeed(player.moveSpeed + SPEED_UP);
+		player.ChangeMoveSpeed(player.moveSpeed + SPEED_UP);
 	}
 
 	protected override void OnDisableEnergy()
 	{
 		base.OnDisableEnergy();
-		player.OnChangeMoveSpeed(player.moveSpeed - SPEED_UP);
+		player.ChangeMoveSpeed(player.moveSpeed - SPEED_UP);
 	}
 }

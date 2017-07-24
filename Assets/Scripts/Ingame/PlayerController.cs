@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     float groundDistance = 1f;
     [SerializeField]
-    bool groundCheck = true, isGround = false, isMove = true;
+    bool groundCheck = true, isGround = false, isMove = false;
 
     [SerializeField]
     private float h, v;
@@ -106,7 +106,7 @@ public class PlayerController : MonoBehaviour
     /// 캐릭터의 이동속도를 변경합니다.
     /// </summary>
     /// <param name="changeSpeed">변화할 속도 값</param>
-    public void OnChangeMoveSpeed(float _changeSpeed)
+    public void ChangeMoveSpeed(float _changeSpeed)
     {
         moveSpeed = _changeSpeed;
     }
@@ -115,8 +115,16 @@ public class PlayerController : MonoBehaviour
     /// 캐릭터의 최대 점프 횟수를 증가합니다.
     /// </summary>
     /// <param name="max">최대 값</param>
-    public void OnChangeJumpCount(int _max)
+    public void ChangeJumpCount(int _max)
     {
         maxJumpCount = _max;
+    }
+
+    /// <summary>
+    /// 캐릭터의 조종을 허가합니다.
+    /// </summary>
+    public void ChangeMove() {
+        isMove = true;
+        CameraController.instance.SetPlayerView();
     }
 }
