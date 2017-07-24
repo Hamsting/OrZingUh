@@ -55,6 +55,7 @@ public class GameManager : MonoBehaviour
 		ui = UIInGameManager.instance;
 		ui.OnChangeMaxHeightViewer(100);
 		ui.OnChangeHeightViewer(0, 100);
+        AudioManager.instance.PlayInGame();
 	}
 
 	private void Update()

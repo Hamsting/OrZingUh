@@ -98,6 +98,8 @@ public class SpawnManager : MonoBehaviour
 		obj.layer = LayerMask.NameToLayer("MovingBlock");
 		obj.SetActive(true);
 
+        AudioManager.instance.PlayBlock();
+
 		return b;
 	}
 }

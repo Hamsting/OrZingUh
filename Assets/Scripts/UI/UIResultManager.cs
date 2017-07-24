@@ -43,11 +43,13 @@ public class UIResultManager : MonoBehaviour
 
     public void OnRePlay()
     {
+        AudioManager.instance.PlayTouch();
         SceneManager.LoadScene("GameScene");
     }
 
     public void OnTitle()
     {
+        AudioManager.instance.PlayTouch();
         SceneManager.LoadScene("Title");
     }
 }

@@ -80,6 +80,7 @@ public class PlayerController : MonoBehaviour
             return;
 
         ++jumpCount;
+        AudioManager.instance.PlayJump();
         ri.velocity = new Vector3(ri.velocity.x, jumpPower, ri.velocity.z);
         ani.SetBool("Jump", true);
 
