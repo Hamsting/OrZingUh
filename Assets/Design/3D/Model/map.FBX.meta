@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 800bfcfa176ec5d4d81e0e3fa18f61ed
-timeCreated: 1500914958
+guid: 6353244b4961ce04783cbef0dae2ebd8
+timeCreated: 1500916972
 licenseType: Free
 ModelImporter:
   serializedVersion: 21
@@ -12,7 +12,7 @@ ModelImporter:
     100008: Cylinder002
     100010: Cylinder003
     100012: //RootNode
-    100014: Plane001
+    100014: Object001
     400000: Box002
     400002: Box003
     400004: Box005
@@ -20,28 +20,28 @@ ModelImporter:
     400008: Cylinder002
     400010: Cylinder003
     400012: //RootNode
-    400014: Plane001
+    400014: Object001
     2300000: Box002
     2300002: Box003
     2300004: Box005
     2300006: Box006
     2300008: Cylinder002
     2300010: Cylinder003
-    2300012: Plane001
+    2300012: Object001
     3300000: Box002
     3300002: Box003
     3300004: Box005
     3300006: Box006
     3300008: Cylinder002
     3300010: Cylinder003
-    3300012: Plane001
+    3300012: Object001
     4300000: Cylinder002
     4300002: Box002
     4300004: Box003
     4300006: Box005
     4300008: Cylinder003
     4300010: Box006
-    4300012: Plane001
+    4300012: Object001
     9500000: //RootNode
   materials:
     importMaterials: 1

@@ -9,6 +9,7 @@ TagManager:
   - Wall_Backward
   - Wall_Left
   - PlayerFoot
+  - NotChangeRender
   layers:
   - Default
   - TransparentFX
@@ -22,7 +23,7 @@ TagManager:
   - Block
   - MovingBlock
   - Player
-  - 
+  - CatPush
   - 
   - 
   - 

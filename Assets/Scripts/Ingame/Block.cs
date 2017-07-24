@@ -31,7 +31,7 @@ public class Block : MonoBehaviour
 
 	private void Fall()
 	{
-		this.rb.velocity = -this.transform.up * 4f;
+		this.rb.velocity = -this.transform.up * 6f;
 	}
 
 	private void OnCollisionEnter(Collision _col)
