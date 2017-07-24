@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class LightEnergy : Energy
 {
-	private static readonly float SPEED_UP = 1f;
+	private static readonly float SPEED_UP = 3f;
 
 
 

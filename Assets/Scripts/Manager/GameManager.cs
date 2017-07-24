@@ -119,7 +119,7 @@ public class GameManager : MonoBehaviour
 		}
 
 		Vector3 minPos = minHeightCube.position;
-		minPos.y = height - 0.5f;
+		minPos.y = height - 1.5f;
 		minHeightCube.position = minPos;
 	}
 
