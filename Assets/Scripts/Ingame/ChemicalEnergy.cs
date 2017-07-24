@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ChemicalEnergy : Energy
 {
+	private static readonly float SPEED_DOWN = 1f;
 
 
 
@@ -21,10 +22,12 @@ public class ChemicalEnergy : Energy
 	protected override void OnEnable()
 	{
 		base.OnEnable();
+		player.OnChangeMoveSpeed(player.moveSpeed - SPEED_DOWN);
 	}
 
 	protected override void OnDisable()
 	{
 		base.OnDisable();
+		player.OnChangeMoveSpeed(player.moveSpeed + SPEED_DOWN);
 	}
 }

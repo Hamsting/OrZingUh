@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour
 	[SerializeField]
 	Energy.Type energyType;
     [SerializeField]
-    float moveSpeed = 5f;
+    public float moveSpeed = 5f;
     [SerializeField]
     float jumpPower = 5f;
     [SerializeField]
@@ -38,6 +38,7 @@ public class PlayerController : MonoBehaviour
     {
         GameManager.Instance.player = this;
         CameraController.instance.SetTarget(tr);
+		CameraController.instance.SetPlayerView();
     }
 
     void Update()

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class HeatEnergy : Energy
 {
+	private float timer = 2f;
 
 
 
@@ -16,6 +17,13 @@ public class HeatEnergy : Energy
 	protected override void Update()
 	{
 		base.Update();
+		if (isEnabled)
+		{
+			if (timer > 0f)
+				timer -= Time.deltaTime;
+			else
+				OnDisable();
+		}
 	}
 
 	protected override void OnEnable()
@@ -26,5 +34,6 @@ public class HeatEnergy : Energy
 	protected override void OnDisable()
 	{
 		base.OnDisable();
+		Destroy(this.gameObject);
 	}
 }

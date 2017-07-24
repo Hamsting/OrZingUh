@@ -7,6 +7,7 @@ public class Energy : MonoBehaviour
 	public Type energyType;
 
 	protected PlayerController player;
+	protected bool isEnabled = false;
 
 
 
@@ -23,13 +24,13 @@ public class Energy : MonoBehaviour
 
 	protected virtual void OnEnable()
 	{
-
-	}
+		isEnabled = true;
+    }
 
 	protected virtual void OnDisable()
 	{
-
-	}
+		isEnabled = false;
+    }
 
 	protected void OnCollisionEnter(Collision _col)
 	{
@@ -47,3 +48,10 @@ public class Energy : MonoBehaviour
 		Chemical,
 	}
 }
+
+/*
+
+위치 - 텔레포트 (현재 위치의 위에서 가장 가까운것)
+열 - 블럭이 부서쥠
+
+	*/
